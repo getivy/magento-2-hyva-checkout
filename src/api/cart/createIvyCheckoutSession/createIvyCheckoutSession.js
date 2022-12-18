@@ -1,6 +1,6 @@
 import LocalStorage from '@hyva/react-checkout/utils/localStorage';
-import modifier from './modifier';
 import sendRequest from '@hyva/react-checkout/api/sendRequest';
+import modifier from './modifier';
 import { CRETE_IVY_CHECKOUT_SESSION } from './mutation';
 
 export default async function createIvyCheckoutSession(

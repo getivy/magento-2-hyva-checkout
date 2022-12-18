@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
+import { __ } from '@hyva/react-checkout/i18n';
 import createIvyCheckoutSession from '../api/cart/createIvyCheckoutSession';
 import useIvyPaymentAppContext from './useIvyPaymentAppContext';
-import { __ } from '@hyva/react-checkout/i18n';
 
 export default function useIvyPayment() {
   const { setPageLoader, appDispatch, setErrorMessage } =
