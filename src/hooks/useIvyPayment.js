@@ -8,7 +8,7 @@ export default function useIvyPayment() {
   const { setPageLoader, appDispatch, setErrorMessage } =
     useIvyPaymentAppContext();
 
-  const placeOrder = useCallback(async () => {
+  const paymentSubmitHandler = useCallback(async () => {
     try {
       setPageLoader(true);
       const response = await createIvyCheckoutSession(appDispatch, false);
@@ -29,6 +29,6 @@ export default function useIvyPayment() {
   }, [setPageLoader, appDispatch, setErrorMessage]);
 
   return {
-    placeOrder,
+    paymentSubmitHandler,
   };
 }

@@ -9,12 +9,13 @@ import useIvyPaymentFormikContext from '../hooks/useIvyPaymentFormikContext';
 import RadioInput from '../../../../components/common/Form/RadioInput';
 import RootElement from '../../../../utils/rootElement';
 import { __ } from '../../../../i18n';
+import useCheckoutFormContext from '../../../../hook/useCheckoutFormContext';
 
 function IvyPaymentRenderer({ method, selected }) {
   const ivyPaymentLogoUrl = `${RootElement.getFilePath()}/Esparksinc_IvyPayment/images/ivylogo.svg`;
-
+  const { registerPaymentAction } = useCheckoutFormContext();
   const methodCode = method.code;
-  const { placeOrder } = useIvyPayment();
+  const { paymentSubmitHandler } = useIvyPayment();
   const { setPageLoader } = useIvyPaymentAppContext();
   const { setFieldValue } = useIvyPaymentFormikContext();
   const { isVirtualCart, setPaymentMethod, hasCartShippingAddress } =
@@ -32,6 +33,10 @@ function IvyPaymentRenderer({ method, selected }) {
     setPageLoader(false);
   }, [methodCode, setPageLoader, setPaymentMethod, setFieldValue]);
 
+  useEffect(() => {
+    registerPaymentAction('ivy', paymentSubmitHandler);
+  }, [registerPaymentAction, paymentSubmitHandler]);
+
   const radioLabel = (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
@@ -42,32 +47,15 @@ function IvyPaymentRenderer({ method, selected }) {
     </label>
   );
 
-  const css = isSelected
-    ? `button.btn.btn-primary.btn-size-lg.false {
-        display: none !important;} `
-    : ``;
-
   return (
-    <>
-      <style>{css}</style>
-      <RadioInput
-        label={radioLabel}
-        value={method.code}
-        name="paymentMethod"
-        checked={isSelected}
-        disabled={!isPaymentAvailable}
-        onChange={paymentSelectionHandler}
-      />
-      <div className={isSelected ? 'mt-4 ml-6' : 'hidden h-0'}>
-        <button
-          onClick={placeOrder}
-          className="ivy-checkout-button ivy-product-button"
-          type="button"
-        >
-          <span>{__('Ivy Payment')}</span>
-        </button>
-      </div>
-    </>
+    <RadioInput
+      label={radioLabel}
+      value={method.code}
+      name="paymentMethod"
+      checked={isSelected}
+      disabled={!isPaymentAvailable}
+      onChange={paymentSelectionHandler}
+    />
   );
 }
 
