@@ -43,7 +43,7 @@ function IvyPaymentRenderer({ method, selected }) {
       htmlFor={`paymentMethod_${methodCode}`}
       className="inline-block pl-2 cursor-pointer"
     >
-      <img src={ivyPaymentLogoUrl} alt={__('Amazon Pay')} />
+      <img src={ivyPaymentLogoUrl} alt={__('Ivy Payment')} />
     </label>
   );
 
