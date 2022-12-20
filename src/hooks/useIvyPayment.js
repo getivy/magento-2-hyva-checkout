@@ -16,7 +16,7 @@ export default function useIvyPayment() {
         if (Object.prototype.hasOwnProperty.call(window, 'startIvyCheckout')) {
           window.startIvyCheckout(response.redirectUrl, 'popup');
         } else {
-          setErrorMessage(__('not loading CDN for IvyCheckout'));
+          setErrorMessage(__('Not loading CDN for IvyCheckout'));
         }
       } else {
         setErrorMessage(__(response.errorMessage));
